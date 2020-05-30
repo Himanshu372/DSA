@@ -84,3 +84,14 @@ class LinkedList(object):
         while curr_node.next is not None:
             curr_node = curr_node.next
             print(curr_node.value)
+
+    def reverse_linked_list(self):
+        curr_node = self.head
+        previous = None
+        while curr_node.next is not None:
+            next_node = curr_node.next
+            curr_node.next = previous
+            previous = curr_node
+            curr_node = next_node
+        self.head = previous
+        return
