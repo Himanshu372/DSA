@@ -27,7 +27,7 @@ class DoublyLinkedList(object):
     def _get(self, value):
         curr_node = self.head
         if curr_node.value == value:
-            return node
+            return curr_node
         while curr_node.next is not None:
             curr_node = curr_node.next
             if curr_node.value == value:
