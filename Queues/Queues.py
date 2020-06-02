@@ -1,4 +1,7 @@
 class Queue(object):
+    """
+    Implementing queue with fixed size and increasing size as and when required
+    """
     def __init__(self, size):
         self._front = 0
         self._size = size
