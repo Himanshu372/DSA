@@ -95,3 +95,17 @@ class LinkedList(object):
             curr_node = next_node
         self.head = previous
         return
+
+    def recursive_delete(self, pos, head=None):
+        if pos > len(self):
+            return self
+        curr_node = self.head if not head else head
+        if pos == 1:
+            next_node = curr_node.next
+            tail_node = next_node.next
+            curr_node.next = tail_node
+            return self
+        self.recursive_delete(pos - 1, curr_node)
+
+
+
