@@ -77,7 +77,7 @@ class Heap(object):
             index = smaller_child_index
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     h = Heap()
     h.insert(5)
     h.insert(10)
