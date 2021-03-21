@@ -14,6 +14,9 @@ func main() {
 	}
 	ll.InsertAtEnd(10)
 	ll.InsertAtEnd(15)
+	ll.InsertInBetween(7)
+	ll.InsertAtStart(2)
+	ll.Delete(15)
 	ll.PrintLinkedList()
 	var reversedLinkedList *linkedlists.SinglyLinkedList
 	reversedLinkedList, err = ll.ReverseLinkedList()
