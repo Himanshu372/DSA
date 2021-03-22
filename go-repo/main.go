@@ -6,6 +6,7 @@ import (
 	)
 
 func main() {
+	fmt.Println("======= LinkedLists =========")
 	var ll *linkedlists.SinglyLinkedList
 	var err error
 	ll, err  = linkedlists.NewLinkedList(5)
@@ -25,4 +26,5 @@ func main() {
 	}
 	fmt.Println("Reversed LinkedList")
 	reversedLinkedList.PrintLinkedList()
+	fmt.Println("======= DoublyLinkedLists =========")
 }
