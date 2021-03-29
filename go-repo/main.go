@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gorepo/v1/doublylinkedlists"
 	"gorepo/v1/linkedlists"
 	)
 
@@ -27,4 +28,15 @@ func main() {
 	fmt.Println("Reversed LinkedList")
 	reversedLinkedList.PrintLinkedList()
 	fmt.Println("======= DoublyLinkedLists =========")
+	var dll *doublylinkedlists.DoublyLinkedList
+	dll, err  = doublylinkedlists.NewDoublyLinkedList(5)
+	if err != nil {
+		panic(err)
+	}
+	dll.InsertAtEnd(10)
+	dll.InsertAtEnd(15)
+	dll.InsertAtEnd(20)
+	dll.InsertInBetween(7)
+	dll.InsertAtStart(2)
+	dll.PrintDoublyLinkedList()
 }

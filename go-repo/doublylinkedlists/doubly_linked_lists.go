@@ -40,13 +40,12 @@ func NewDoublyLinkedList(value int) (dll *DoublyLinkedList, err error) {
 func (dll *DoublyLinkedList) len() (lenght int, err error) {
 	var currentHead *DoublyLinkedNode
 	currentHead = dll.head
-	lenght = 0
 	for {
-		if currentHead.next != nil {
-			lenght += 1
-			currentHead = currentHead.next
+		lenght += 1
+		if currentHead.next == nil {
+			break
 		}
-		break
+		currentHead = currentHead.next
 	}
 	return lenght, nil
 }
@@ -119,9 +118,35 @@ func (dll *DoublyLinkedList) InsertInBetween(value int) (err error) {
 	if err != nil {
 		return err
 	}
-	if lenght % 2 != 0 {
-		midLenght = lenght - 1
+	if lenght % 2 == 0 {
+		midLenght = (lenght / 2) - 1
+	} else {
+		midLenght = lenght / 2
 	}
+	nextNode = dll.doublyLinkedListMap[midLenght].next
+	previousNode = dll.doublyLinkedListMap[midLenght]
+	nextNode.previous = newNode
+	previousNode.next = newNode
+	for i := lenght - 1; i > midLenght; i-- {
+		var tempNode *DoublyLinkedNode
+		tempNode = dll.doublyLinkedListMap[i]
+		dll.doublyLinkedListMap[i + 1] = tempNode
+	}
+	dll.doublyLinkedListMap[midLenght + 1] = newNode
+	dll.doublyLinkedListMap[midLenght + 1].previous = previousNode
+	dll.doublyLinkedListMap[midLenght + 1].next = nextNode
+	return nil
+}
 
+func (dll *DoublyLinkedList) PrintDoublyLinkedList() error {
+	currentHead := dll.head
+	for {
+		if currentHead.next == nil {
+			break
+		}
+		fmt.Println(currentHead.val)
+		currentHead = currentHead.next
+	}
+	fmt.Println(currentHead.val)
 	return nil
 }
