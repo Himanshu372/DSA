@@ -72,6 +72,13 @@ func (dll *DoublyLinkedList) get(value int) (node *DoublyLinkedNode, err error) 
 func (dll *DoublyLinkedList) InsertAtStart(value int) (err error) {
 	var currentHead *DoublyLinkedNode
 	var newHead *DoublyLinkedNode
+	var tempNode *DoublyLinkedNode
+	var lenght int
+	var i int
+	lenght, err = dll.len()
+	if err != nil {
+		return err
+	}
 	currentHead = dll.head
 	newHead, err = NewDoublyLinkedNode(value)
 	if err != nil {
@@ -80,6 +87,10 @@ func (dll *DoublyLinkedList) InsertAtStart(value int) (err error) {
 	currentHead.previous = newHead
 	newHead.next = currentHead
 	dll.head = newHead
+	for i = lenght; i >= 1; i-- {
+		tempNode = dll.doublyLinkedListMap[i - 1]
+		dll.doublyLinkedListMap[i] = tempNode
+	}
 	dll.doublyLinkedListMap[0] = newHead
 	dll.doublyLinkedListMap[1] = currentHead
 	return nil
@@ -135,6 +146,30 @@ func (dll *DoublyLinkedList) InsertInBetween(value int) (err error) {
 	dll.doublyLinkedListMap[midLenght + 1] = newNode
 	dll.doublyLinkedListMap[midLenght + 1].previous = previousNode
 	dll.doublyLinkedListMap[midLenght + 1].next = nextNode
+	return nil
+}
+
+func (dll *DoublyLinkedList) ReverseDoublyLinkedList() (err error) {
+	reversedDoublyLinkedListMap := make(map[int]*DoublyLinkedNode, 0)
+	var nextNode *DoublyLinkedNode
+	var previousNode *DoublyLinkedNode
+	var lenght int
+	var newIndex int
+	var i int
+	lenght, err = dll.len()
+	if err != nil {
+		return err
+	}
+	for i = lenght - 1; i >= 0; i-- {
+		nextNode = dll.doublyLinkedListMap[i].next
+		previousNode = dll.doublyLinkedListMap[i].previous
+		newIndex = (lenght - 1) - i
+		reversedDoublyLinkedListMap[newIndex] = dll.doublyLinkedListMap[i]
+		reversedDoublyLinkedListMap[newIndex].previous = nextNode
+		reversedDoublyLinkedListMap[newIndex].next = previousNode
+	}
+	dll.head = reversedDoublyLinkedListMap[0]
+	dll.doublyLinkedListMap = reversedDoublyLinkedListMap
 	return nil
 }
 
