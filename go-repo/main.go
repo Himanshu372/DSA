@@ -39,4 +39,7 @@ func main() {
 	dll.InsertInBetween(7)
 	dll.InsertAtStart(2)
 	dll.PrintDoublyLinkedList()
+	dll.ReverseDoublyLinkedList()
+	fmt.Println("Reversed DoublyLinkedList")
+	dll.PrintDoublyLinkedList()
 }
