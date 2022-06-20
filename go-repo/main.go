@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"gorepo/v1/arrays"
 	"gorepo/v1/doublylinkedlists"
 	"gorepo/v1/linkedlists"
 	)
@@ -42,4 +43,11 @@ func main() {
 	dll.ReverseDoublyLinkedList()
 	fmt.Println("Reversed DoublyLinkedList")
 	dll.PrintDoublyLinkedList()
+	fmt.Println("======+Arrays=======")
+	testArray := []int{84,-37,32,40,95}
+	sumRequired := 167
+	//minLen := arrays.ShortestSubarraySum(testArray, sumRequired)
+	//fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d", testArray, sumRequired, minLen)
+	minLenWithMonoqueue := arrays.ShortestSubArraySumWithQueue(testArray, sumRequired)
+	fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d", testArray, sumRequired, minLenWithMonoqueue)
 }
