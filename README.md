@@ -1,2 +1,2 @@
-# Data-Structures
-Repo implementating data structures in various languages that I learn moving forward 
+# DSA
+Repo implementating data structures and algorithms in various languages
