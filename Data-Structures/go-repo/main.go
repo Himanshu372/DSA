@@ -1,11 +1,16 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"gorepo/v1/arrays"
 	"gorepo/v1/doublylinkedlists"
 	"gorepo/v1/linkedlists"
-	)
+	"io"
+	"io/ioutil"
+	"os"
+	"strings"
+)
 
 func main() {
 	fmt.Println("======= LinkedLists =========")
@@ -49,5 +54,28 @@ func main() {
 	//minLen := arrays.ShortestSubarraySum(testArray, sumRequired)
 	//fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d", testArray, sumRequired, minLen)
 	minLenWithMonoqueue := arrays.ShortestSubArraySumWithQueue(testArray, sumRequired)
-	fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d", testArray, sumRequired, minLenWithMonoqueue)
+	fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d\n", testArray, sumRequired, minLenWithMonoqueue)
+
+	f, err := ioutil.TempFile("", "file")
+	if err != nil {
+		panic(err)
+	}
+	_, err = io.Copy(f, strings.NewReader("New string"))
+	if err != nil {
+		panic(err)
+	}
+	_, err = f.Seek(0, io.SeekStart)
+	if err != nil {
+		panic(err)
+	}
+	err = os.Remove(f.Name())
+	if err != nil {
+	    panic(err)
+	}
+	buff := bytes.NewBuffer([]byte{})
+	_, err = io.Copy(buff, f)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%s", buff.String())
 }
