@@ -17,5 +17,19 @@ class Search:
                 curr_pointer = curr_array[len(curr_array) // 2]
             else:
                 index = self.input_arr.index(curr_pointer)
+        return index
 
+    def ternary_serach(self, elem: int) -> int:
+        index = 0
+        curr_array = self.input_arr
+        curr_pointer = curr_array[len(curr_array) // 3]
+        while index == 0:
+            if elem < curr_pointer:
+                curr_array = curr_array[:(len(curr_array) // 3)]
+                curr_pointer = curr_array[len(curr_array) // 3]
+            elif elem > curr_pointer:
+                curr_array = curr_array[(len(curr_array) // 3):]
+                curr_pointer = curr_array[len(curr_array) // 3]
+            else:
+                index = self.input_arr.index(curr_pointer)
         return index
