@@ -68,7 +68,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = g.AddVertex([]*graph.Vertex{u, v, x})
+	y, err := graph.NewVertex("shiny")
+	if err != nil {
+		panic(err)
+	}
+	z, err := graph.NewVertex("dark")
+	if err != nil {
+		panic(err)
+	}
+	err = g.AddVertex([]*graph.Vertex{u, v, x, y, z})
 	if err != nil {
 		panic(err)
 	}
@@ -80,8 +88,24 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	err = g.AddEdge(v, x)
+	if err != nil {
+		panic(err)
+	}
+	err = g.AddEdge(x, y)
+	if err != nil {
+		panic(err)
+	}
+	err = g.AddEdge(x, z)
+	if err != nil {
+		panic(err)
+	}
 
-	err = g.DFS(u)
+	//err = g.DFS(u)
+	//if err != nil {
+	//	panic(err)
+	//}
+	err = g.BFS(u)
 	if err != nil {
 		panic(err)
 	}
