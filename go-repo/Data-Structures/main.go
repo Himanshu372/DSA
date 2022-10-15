@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gorepo/v1/arrays"
 	"gorepo/v1/doublylinkedlists"
+	"gorepo/v1/graph"
 	"gorepo/v1/linkedlists"
 	"io"
 	"io/ioutil"
@@ -16,7 +17,7 @@ func main() {
 	fmt.Println("======= LinkedLists =========")
 	var ll *linkedlists.SinglyLinkedList
 	var err error
-	ll, err  = linkedlists.NewLinkedList(5)
+	ll, err = linkedlists.NewLinkedList(5)
 	if err != nil {
 		panic(err)
 	}
@@ -35,7 +36,7 @@ func main() {
 	reversedLinkedList.PrintLinkedList()
 	fmt.Println("======= DoublyLinkedLists =========")
 	var dll *doublylinkedlists.DoublyLinkedList
-	dll, err  = doublylinkedlists.NewDoublyLinkedList(5)
+	dll, err = doublylinkedlists.NewDoublyLinkedList(5)
 	if err != nil {
 		panic(err)
 	}
@@ -48,8 +49,45 @@ func main() {
 	dll.ReverseDoublyLinkedList()
 	fmt.Println("Reversed DoublyLinkedList")
 	dll.PrintDoublyLinkedList()
+
+	fmt.Println("======= Graph =======")
+	v, err := graph.NewVertex("classic")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(v)
+	g, err := graph.NewGraph()
+	if err != nil {
+		panic(err)
+	}
+	u, err := graph.NewVertex("strange")
+	if err != nil {
+		panic(err)
+	}
+	x, err := graph.NewVertex("new")
+	if err != nil {
+		panic(err)
+	}
+	err = g.AddVertex([]*graph.Vertex{u, v, x})
+	if err != nil {
+		panic(err)
+	}
+	err = g.AddEdge(u, v)
+	if err != nil {
+		panic(err)
+	}
+	err = g.AddEdge(v, x)
+	if err != nil {
+		panic(err)
+	}
+
+	err = g.DFS(u)
+	if err != nil {
+		panic(err)
+	}
+	g.Print()
 	fmt.Println("======+Arrays=======")
-	testArray := []int{84,-37,32,40,95}
+	testArray := []int{84, -37, 32, 40, 95}
 	sumRequired := 167
 	//minLen := arrays.ShortestSubarraySum(testArray, sumRequired)
 	//fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d", testArray, sumRequired, minLen)
@@ -70,7 +108,7 @@ func main() {
 	}
 	err = os.Remove(f.Name())
 	if err != nil {
-	    panic(err)
+		panic(err)
 	}
 	buff := bytes.NewBuffer([]byte{})
 	_, err = io.Copy(buff, f)
