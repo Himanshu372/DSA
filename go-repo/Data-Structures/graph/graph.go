@@ -54,10 +54,6 @@ func (g *Graph) AddEdge(u, v *Vertex) error {
 	if err != nil {
 		return err
 	}
-	err = v.AddNeighbour(u)
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
@@ -82,9 +78,37 @@ func (g *Graph) DFS(v *Vertex) error {
 	return nil
 }
 
+func (g *Graph) BFS(v *Vertex) error {
+	var startTime, endTime time.Time
+	startTime = time.Now()
+	v.Color = "red"
+	fmt.Printf("visited vertex: %s\n", v.Name)
+	visited := make([]*Vertex, 0)
+	for _, vertice := range v.Neighbours {
+		vertice.Color = "red"
+		fmt.Printf("visited vertex: %s\n", vertice.Name)
+		visited = append(visited, vertice)
+	}
+	for len(visited) != 0 {
+		curr_vertice := visited[0]
+		visited = visited[1:]
+		for _, vertice := range curr_vertice.Neighbours {
+			if vertice.Color != "red" {
+				vertice.Color = "red"
+				fmt.Printf("visited vertex: %s\n", vertice.Name)
+			}
+			visited = append(visited, vertice)
+		}
+	}
+	endTime = time.Now()
+	duration := endTime.Sub(startTime)
+	fmt.Printf("duration for bfs search from vertex %s is %f\n", v.Name, duration.Seconds())
+	return nil
+}
+
 func (g *Graph) Print() error {
 	if len(g.Vertices) == 0 {
-		fmt.Printf("graph: %v has not vertices")
+		fmt.Printf("graph: %v has not vertices", g)
 		return nil
 	}
 	for _, vertice := range g.Vertices {
