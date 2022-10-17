@@ -1,3 +1,4 @@
+
 class Stack(object):
     """
     Implementation of Stack class. If follows LIFO(Last In First Out) principle
@@ -35,5 +36,3 @@ if __name__=='__main__':
     print(s.top())
     print(s)
     print(s.is_empty())
-
-

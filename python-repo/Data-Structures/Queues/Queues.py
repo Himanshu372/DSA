@@ -58,4 +58,3 @@ if __name__=="__main__":
     q.enqueue(4)
     q.dequeue()
     q.enqueue(0)
-    print(q)

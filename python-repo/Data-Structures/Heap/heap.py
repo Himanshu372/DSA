@@ -85,6 +85,3 @@ if __name__ == '__main__':
     h.insert(7)
     h.delete()
     print(h)
-
-
-

@@ -106,6 +106,3 @@ class LinkedList(object):
             curr_node.next = tail_node
             return self
         self.recursive_delete(pos - 1, curr_node)
-
-
-
