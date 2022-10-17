@@ -140,5 +140,3 @@ if __name__ == '__main__':
     t.insert(15)
     t.insert(17)
     print(t)
-
-

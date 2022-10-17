@@ -1,3 +1,5 @@
+
+
 class Node(object):
     """
     ADT for implementing Binary tree
@@ -97,5 +99,3 @@ if __name__=='__main__':
     t.postorder_traversal()
     t.inorder_traversal()
     t.breath_first_traversal()
-
-
