@@ -49,6 +49,7 @@ class BinaryTree(object):
                 return self.search(value, curr_node.left)
             return False
 
+    # Preorder traversal : root -> left subtree -> right subtree
     def preorder_traversal(self, node=None):
         curr_node = node if node else self.root
         print(curr_node.value, end=' ')
@@ -57,6 +58,7 @@ class BinaryTree(object):
         if curr_node.right:
             self.preorder_traversal(curr_node.right)
 
+    # Postorder traversal: left subtree -> right subtree -> root
     def postorder_traversal(self, node=None):
         curr_node = node if node else self.root
         if curr_node.left:
@@ -66,6 +68,7 @@ class BinaryTree(object):
         print(curr_node.value, end=' ')
 
 
+    # Inorder traversal: left subtree -> root -> right subtree
     def inorder_traversal(self, node=None):
         curr_node = node if node else self.root
         if curr_node.left:
@@ -89,6 +92,10 @@ class BinaryTree(object):
         children = self._get_children(curr_node)
         for child in children:
             self.breath_first_traversal(child)
+
+
+    def traversal(self, node=None):
+        curr_node = node
 
 
 if __name__=='__main__':

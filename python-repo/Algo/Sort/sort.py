@@ -17,6 +17,7 @@ class Sort:
                     shallow_arr[k] = shallow_arr[k + 1]
                     shallow_arr[k + 1] = temp
         return shallow_arr
+
     def selection_sort(self):
         steps = 0
         l = copy.copy(self.arr)
