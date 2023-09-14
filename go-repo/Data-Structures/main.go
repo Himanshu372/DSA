@@ -3,10 +3,10 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"gorepo/v1/arrays"
-	"gorepo/v1/doublylinkedlists"
-	"gorepo/v1/graph"
-	"gorepo/v1/linkedlists"
+	"gorepo/v1/go-repo/Data-Structures/arrays"
+	"gorepo/v1/go-repo/Data-Structures/doublylinkedlists"
+	"gorepo/v1/go-repo/Data-Structures/graph"
+	"gorepo/v1/go-repo/Data-Structures/linkedlists"
 	"io"
 	"io/ioutil"
 	"os"
@@ -101,10 +101,10 @@ func main() {
 		panic(err)
 	}
 
-	//err = g.DFS(u)
-	//if err != nil {
-	//	panic(err)
-	//}
+	err = g.DFS(u)
+	if err != nil {
+		panic(err)
+	}
 	err = g.BFS(u)
 	if err != nil {
 		panic(err)

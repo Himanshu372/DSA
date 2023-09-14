@@ -1,4 +1,5 @@
 from typing import List, Dict
+import collections
 
 
 class GraphNode:
@@ -65,7 +66,6 @@ class Graph:
             if not visited.get(node):
                 stack.append(node)
         return stack[::-1]
-
 
 
 
