@@ -3,14 +3,15 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"gorepo/v1/go-repo/Data-Structures/arrays"
-	"gorepo/v1/go-repo/Data-Structures/doublylinkedlists"
-	"gorepo/v1/go-repo/Data-Structures/graph"
-	"gorepo/v1/go-repo/Data-Structures/linkedlists"
+	"gorepo/v1/Data-Structures/arrays"
+	"gorepo/v1/Data-Structures/doublylinkedlists"
+	"gorepo/v1/Data-Structures/graph"
+	"gorepo/v1/Data-Structures/linkedlists"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -101,14 +102,29 @@ func main() {
 		panic(err)
 	}
 
-	err = g.DFS(u)
+	//err = g.DFS(u)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//err = g.BFS(u)
+	//if err != nil {
+	//	panic(err)
+	//}
+
+	s1 := time.Now()
+	err = g.RecursiveDFS(u)
+	e1 := time.Now()
+	fmt.Printf("Time for RecursiveDFS: %d\n", e1.Sub(s1).Nanoseconds())
 	if err != nil {
 		panic(err)
 	}
-	err = g.BFS(u)
+	s2 := time.Now()
+	err = g.RecursiveBFS(u)
 	if err != nil {
 		panic(err)
 	}
+	e2 := time.Now()
+	fmt.Printf("Time for RecursiveBFS: %d\n", e2.Sub(s2).Nanoseconds())
 	g.Print()
 	fmt.Println("======+Arrays=======")
 	testArray := []int{84, -37, 32, 40, 95}
