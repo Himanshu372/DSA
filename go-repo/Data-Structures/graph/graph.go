@@ -6,9 +6,9 @@ import (
 )
 
 type Vertex struct {
-	Neighbours []*Vertex
-	Name       string
-	Color      string
+	Neighbours []*Vertex `json:"neighbours"`
+	Name       string    `json:"name"`
+	Color      string    `json:"color"`
 }
 
 func NewVertex(name string) (*Vertex, error) {
@@ -78,6 +78,20 @@ func (g *Graph) DFS(v *Vertex) error {
 	return nil
 }
 
+func (g *Graph) RecursiveDFS(v *Vertex) error {
+	if v.Color == "red" {
+		return nil
+	}
+	v.Color = "red"
+	for _, neighbour := range v.Neighbours {
+		err := g.RecursiveDFS(neighbour)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (g *Graph) BFS(v *Vertex) error {
 	var startTime, endTime time.Time
 	startTime = time.Now()
@@ -103,6 +117,25 @@ func (g *Graph) BFS(v *Vertex) error {
 	endTime = time.Now()
 	duration := endTime.Sub(startTime)
 	fmt.Printf("duration for bfs search from vertex %s is %f\n", v.Name, duration.Seconds())
+	return nil
+}
+
+func (g *Graph) RecursiveBFS(v *Vertex) error {
+	if v.Color == "red" {
+		return nil
+	}
+	v.Color = "red"
+	toBeVisited := make([]*Vertex, 0)
+	for _, neighbour := range v.Neighbours {
+		neighbour.Color = "red"
+		toBeVisited = append(toBeVisited, neighbour)
+	}
+	for _, toVisit := range toBeVisited {
+		err := g.RecursiveBFS(toVisit)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
