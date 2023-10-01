@@ -1,4 +1,4 @@
-from Trees.binary_search_tree import Node, BinaryTree
+from .binary_search_tree import Node, BinaryTree
 
 class BalancedNode(Node):
     def __init__(self,value=None, parent=None):
