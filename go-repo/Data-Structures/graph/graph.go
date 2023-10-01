@@ -5,6 +5,33 @@ import (
 	"time"
 )
 
+type MatrixGraph struct {
+	Mat [][]int
+}
+
+func NewMatrixGraph(size int) *MatrixGraph {
+	m := make([][]int, size)
+	return &MatrixGraph{m}
+}
+
+func (m *MatrixGraph) AddEdge(i, j int) {
+	m.Mat[i][j] = 1
+	m.Mat[j][i] = 1
+	return
+}
+
+func (m *MatrixGraph) Print() {
+	//rows, cols := len(m.Mat), len(m.Mat[0])
+	//g := make([])
+	for rowIndex, row := range m.Mat {
+		for _, col := range row {
+			if m.Mat[rowIndex][col] == 1 {
+				fmt.Printf("%d\n", rowIndex)
+			}
+		}
+	}
+}
+
 type Vertex struct {
 	Neighbours []*Vertex `json:"neighbours"`
 	Name       string    `json:"name"`

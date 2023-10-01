@@ -59,6 +59,7 @@ class Graph:
                 self._dfs_ts(adj, visited, stack)
         stack.append(node)
         return
+
     def topological_sort(self, base: GraphNode) -> List[GraphNode]:
         visited, stack = dict(), []
         self._dfs_ts(base, visited, stack)

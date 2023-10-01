@@ -14,7 +14,25 @@ import (
 	"time"
 )
 
+type Vertex struct {
+	X, Y float64
+}
+
+func (v *Vertex) Abs(ver *Vertex) {
+	//fmt.Println(2, &v)
+	//fmt.Println(3, &ver)
+	fmt.Printf("2 %p\n", v)
+	fmt.Printf("3 %p\n", ver)
+	v.X = 10 * v.X
+	v.Y = 10 * v.Y
+	return
+}
+
 func main() {
+	ver := &Vertex{3, 4}
+	fmt.Println(1, &ver)
+	ver.Abs(ver)
+	fmt.Println(4, &ver)
 	fmt.Println("======= LinkedLists =========")
 	var ll *linkedlists.SinglyLinkedList
 	var err error
