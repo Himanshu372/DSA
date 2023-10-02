@@ -2,7 +2,7 @@ from json import JSONDecoder
 from Algo.Search.search import Search
 from Algo.Sort.sort import Sort
 from Data_Structures.Stack.stack import Stack
-from Data_Structures.Trees.balanced_trees import BalancedBinaryTree
+from Data_Structures.Trees.balanced_trees import BalancedBinaryTree, BinaryTree
 from Data_Structures.Queues.queues import Queue
 from Data_Structures.Heap.heap import Heap
 
@@ -54,12 +54,25 @@ if __name__ == "__main__":
     print(s.top())
     print(s)
     print(s.is_empty())
+    print("=====Stack ended======")
+    print("=====Binary-tree started======")
+    t = BinaryTree(3)
+    t.insert(2)
+    t.insert(5)
+    t.preorder_traversal()
+    t.postorder_traversal()
+    t.inorder_traversal()
+    t.breath_first_traversal()
+    print("=====Binary-tree ended======")
+    print("=====Balanced-Binary-tree started======")
     t = BalancedBinaryTree(2)
     t.insert(5)
     t.insert(10)
     t.insert(15)
     t.insert(17)
     print(t)
+    print("=====Balanced-Binary-tree ended======")
+    t = BalancedBinaryTree(2)
     print("=====Stack ended======")
     print("=====Queue started======")
     q = Queue(5)
