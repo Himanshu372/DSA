@@ -1,6 +1,8 @@
 from .binary_search_tree import Node, BinaryTree
 
+
 class BalancedNode(Node):
+
     def __init__(self,value=None, parent=None):
         super(BalancedNode, self).__init__(value)
         self.height = 0
@@ -10,12 +12,12 @@ class BalancedNode(Node):
 class BalancedBinaryTree(BinaryTree):
 
     def __init__(self, value=None):
+        super().__init__(value)
         self.root = BalancedNode(value)
         self.container = []
 
     def __repr__(self):
         return ' '.join(str(i) for i in self._inorder_traversal())
-
 
     def _inorder_traversal(self, node=None):
         curr_node = node if node else self.root
@@ -25,8 +27,6 @@ class BalancedBinaryTree(BinaryTree):
         if curr_node.right:
             self._inorder_traversal(curr_node.right)
         return self.container
-
-
 
     def _max_child_height(self, node):
         if node.left and node.right:
@@ -42,7 +42,6 @@ class BalancedBinaryTree(BinaryTree):
         while node is not None:
             node.height = self._max_child_height(node) + 1
             node = node.parent
-
 
     def _height(self, node):
         if node.left is None:

@@ -17,6 +17,20 @@ class BinaryTree(object):
     def __init__(self, value=None):
         self.root = Node(value)
 
+    @staticmethod
+    def traversal(node=None):
+        curr_node = node
+
+    @staticmethod
+    def _get_children(node):
+        curr_node = node
+        children = []
+        if curr_node.left:
+            children.append(curr_node.left)
+        if curr_node.right:
+            children.append(curr_node.right)
+        return children
+
     def insert(self, value, node=None):
         curr_node = node if node else self.root
         if curr_node.value == value:
@@ -67,7 +81,6 @@ class BinaryTree(object):
             self.postorder_traversal(curr_node.right)
         print(curr_node.value, end=' ')
 
-
     # Inorder traversal: left subtree -> root -> right subtree
     def inorder_traversal(self, node=None):
         curr_node = node if node else self.root
@@ -77,15 +90,6 @@ class BinaryTree(object):
         if curr_node.right:
             self.inorder_traversal(curr_node.right)
 
-    def _get_children(self, node):
-        curr_node = node
-        children = []
-        if curr_node.left:
-            children.append(curr_node.left)
-        if curr_node.right:
-            children.append(curr_node.right)
-        return children
-
     def breath_first_traversal(self, node=None):
         curr_node = node if node else self.root
         print(curr_node.value)
@@ -93,16 +97,3 @@ class BinaryTree(object):
         for child in children:
             self.breath_first_traversal(child)
 
-
-    def traversal(self, node=None):
-        curr_node = node
-
-
-if __name__=='__main__':
-    t = BinaryTree(3)
-    t.insert(2)
-    t.insert(5)
-    t.preorder_traversal()
-    t.postorder_traversal()
-    t.inorder_traversal()
-    t.breath_first_traversal()
