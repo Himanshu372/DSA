@@ -9,7 +9,6 @@ class Node(object):
         self.right = None
         self.value = value
 
-
 class BinaryTree(object):
     """
     Implementation class for Binary Tree
