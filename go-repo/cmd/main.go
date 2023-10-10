@@ -7,6 +7,7 @@ import (
 	"gorepo/v1/Data-Structures/doublylinkedlists"
 	"gorepo/v1/Data-Structures/graph"
 	"gorepo/v1/Data-Structures/linkedlists"
+	"gorepo/v1/Data-Structures/trees"
 	"io"
 	"io/ioutil"
 	"os"
@@ -174,4 +175,15 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("%s", buff.String())
+	fmt.Println("======BinaryTree Started=======")
+	node := &trees.TreeNode{
+		Val: 5,
+	}
+	t := trees.BinarySearchTree{
+		Root: node,
+	}
+	t.AddElement(node, 4)
+	fmt.Println(t.InOrderTraversal())
+	fmt.Println("======BinaryTree Ended=======")
+
 }
