@@ -183,7 +183,10 @@ func main() {
 		Root: node,
 	}
 	t.AddElement(node, 4)
+	t.AddElement(node, 6)
 	fmt.Println(t.InOrderTraversal())
+	fmt.Println(t.PreOrderTraversal())
+	fmt.Println(t.PostOrderTraversal())
 	fmt.Println("======BinaryTree Ended=======")
 
 }

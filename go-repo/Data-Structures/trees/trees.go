@@ -55,6 +55,7 @@ func (t *BinarySearchTree) InOrderTraversal() []int {
 		startNode = startNode.Left
 	}
 	vals = append(vals, t.Root.Val)
+	startNode = t.Root
 	for {
 		if startNode.Right == nil {
 			break
@@ -63,5 +64,54 @@ func (t *BinarySearchTree) InOrderTraversal() []int {
 		vals = append(vals, currVal)
 		startNode = startNode.Right
 	}
+	return vals
+}
+
+func (t *BinarySearchTree) PreOrderTraversal() []int {
+	startNode := t.Root
+	vals := make([]int, 0)
+	vals = append(vals, t.Root.Val)
+	for {
+		if startNode.Left == nil {
+			break
+		}
+		currVal := startNode.Left.Val
+		vals = append(vals, currVal)
+		startNode = startNode.Left
+	}
+	startNode = t.Root
+	for {
+		if startNode.Right == nil {
+			break
+		}
+		currVal := startNode.Right.Val
+		vals = append(vals, currVal)
+		startNode = startNode.Right
+	}
+	return vals
+}
+
+func (t *BinarySearchTree) PostOrderTraversal() []int {
+	startNode := t.Root
+	vals := make([]int, 0)
+	for {
+		if startNode.Right == nil {
+			break
+		}
+		currVal := startNode.Right.Val
+		vals = append(vals, currVal)
+		startNode = startNode.Right
+	}
+	vals = append(vals, t.Root.Val)
+	startNode = t.Root
+	for {
+		if startNode.Left == nil {
+			break
+		}
+		currVal := startNode.Left.Val
+		vals = append(vals, currVal)
+		startNode = startNode.Left
+	}
+
 	return vals
 }
