@@ -115,3 +115,30 @@ func (t *BinarySearchTree) PostOrderTraversal() []int {
 
 	return vals
 }
+
+func (t *BinarySearchTree) BFS() []int {
+	startNode := t.Root
+	q := make([]int, 0)
+	visited := make([]*TreeNode, 0)
+	visited = append(visited, startNode)
+	q = append(q, startNode.Val)
+	for {
+		if len(visited) == 0 {
+			break
+		}
+		startNode = visited[0]
+		var left, right *TreeNode
+		if startNode.Left != nil {
+			left = startNode.Left
+			visited = append(visited, left)
+			q = append(q, left.Val)
+		}
+		if startNode.Right != nil {
+			right = startNode.Right
+			visited = append(visited, right)
+			q = append(q, right.Val)
+		}
+		visited = visited[1:]
+	}
+	return q
+}

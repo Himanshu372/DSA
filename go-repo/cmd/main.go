@@ -184,9 +184,10 @@ func main() {
 	}
 	t.AddElement(node, 4)
 	t.AddElement(node, 6)
-	fmt.Println(t.InOrderTraversal())
-	fmt.Println(t.PreOrderTraversal())
-	fmt.Println(t.PostOrderTraversal())
+	fmt.Printf("inorder traversal for tree: %x\n", t.InOrderTraversal())
+	fmt.Printf("pre-order traversal for tree: %x\n", t.PreOrderTraversal())
+	fmt.Printf("post-order traversal for tree: %x\n", t.PostOrderTraversal())
+	fmt.Printf("bfs for tree: %x\n", t.BFS())
 	fmt.Println("======BinaryTree Ended=======")
 
 }
