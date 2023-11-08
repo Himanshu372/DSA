@@ -15,25 +15,7 @@ import (
 	"time"
 )
 
-type Vertex struct {
-	X, Y float64
-}
-
-func (v *Vertex) Abs(ver *Vertex) {
-	//fmt.Println(2, &v)
-	//fmt.Println(3, &ver)
-	fmt.Printf("2 %p\n", v)
-	fmt.Printf("3 %p\n", ver)
-	v.X = 10 * v.X
-	v.Y = 10 * v.Y
-	return
-}
-
 func main() {
-	ver := &Vertex{3, 4}
-	fmt.Println(1, &ver)
-	ver.Abs(ver)
-	fmt.Println(4, &ver)
 	fmt.Println("======= LinkedLists =========")
 	var ll *linkedlists.SinglyLinkedList
 	var err error
@@ -174,7 +156,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%s", buff.String())
+	fmt.Printf("%s\n", buff.String())
 	fmt.Println("======BinaryTree Started=======")
 	node := &trees.TreeNode{
 		Val: 5,
@@ -182,8 +164,14 @@ func main() {
 	t := trees.BinarySearchTree{
 		Root: node,
 	}
-	t.AddElement(node, 4)
-	fmt.Println(t.InOrderTraversal())
+	t.AddElement(4)
+	t.AddElement(6)
+	t.AddElement(15)
+	t.Print()
+	fmt.Printf("inorder traversal for tree: %x\n", t.InOrderTraversal())
+	fmt.Printf("pre-order traversal for tree: %x\n", t.PreOrderTraversal())
+	fmt.Printf("post-order traversal for tree: %x\n", t.PostOrderTraversal())
+	fmt.Printf("bfs for tree: %x\n", t.BFS())
 	fmt.Println("======BinaryTree Ended=======")
 
 }
