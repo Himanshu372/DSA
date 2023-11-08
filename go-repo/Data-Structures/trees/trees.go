@@ -1,5 +1,7 @@
 package trees
 
+import "fmt"
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -10,37 +12,44 @@ type BinarySearchTree struct {
 	Root *TreeNode
 }
 
-func (t *BinarySearchTree) AddElement(rootNode *TreeNode, val int) {
+func (t *BinarySearchTree) add(node *TreeNode, val int) int {
 	switch {
-	case val < rootNode.Val:
-		if rootNode.Left == nil {
-			node := &TreeNode{
-				Val: val,
-			}
-			rootNode.Left = node
-			return
+	case val < node.Val:
+		if node.Left != nil {
+			return -1
 		}
-		if val < rootNode.Left.Val {
-			t.AddElement(rootNode.Left, val)
-		} else {
-			t.AddElement(rootNode.Right, val)
+		node.Left = &TreeNode{
+			Val: val,
 		}
-	case val > rootNode.Val:
-		if rootNode.Right == nil {
-			node := &TreeNode{
-				Val: val,
-			}
-			rootNode.Right = node
-			return
+		return 0
+	case val > node.Val:
+		if node.Right != nil {
+			return 1
 		}
-		if val < rootNode.Left.Val {
-			t.AddElement(rootNode.Left, val)
-		} else {
-			t.AddElement(rootNode.Right, val)
+		node.Right = &TreeNode{
+			Val: val,
 		}
+		return 0
 	default:
-		return
+		return 0
 	}
+}
+
+func (t *BinarySearchTree) AddElement(val int) {
+	start := t.Root
+	for {
+		if t.add(start, val) == 0 {
+			break
+		}
+		res := t.add(start, val)
+		switch {
+		case res < 0:
+			start = start.Left
+		case res > 0:
+			start = start.Right
+		}
+	}
+
 }
 
 func (t *BinarySearchTree) InOrderTraversal() []int {
@@ -141,4 +150,11 @@ func (t *BinarySearchTree) BFS() []int {
 		visited = visited[1:]
 	}
 	return q
+}
+
+func (t *BinarySearchTree) Print() {
+	nodeVals := t.InOrderTraversal()
+	for _, val := range nodeVals {
+		fmt.Printf("%d\n", val)
+	}
 }
