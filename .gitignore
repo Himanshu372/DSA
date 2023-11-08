@@ -39,3 +39,9 @@ venv/*
 ehthumbs.db
 Thumbs.db
 Desktop.in
+
+# Replit files
+#################
+*.replit
+*.lock
+pyproject.toml
