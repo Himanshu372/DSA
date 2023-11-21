@@ -1,17 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"gorepo/v1/Data-Structures/arrays"
 	"gorepo/v1/Data-Structures/doublylinkedlists"
 	"gorepo/v1/Data-Structures/graph"
 	"gorepo/v1/Data-Structures/linkedlists"
 	"gorepo/v1/Data-Structures/trees"
-	"io"
-	"io/ioutil"
-	"os"
-	"strings"
 	"time"
 )
 
@@ -127,36 +122,13 @@ func main() {
 	e2 := time.Now()
 	fmt.Printf("Time for RecursiveBFS: %d\n", e2.Sub(s2).Nanoseconds())
 	g.Print()
-	fmt.Println("======+Arrays=======")
+	fmt.Println("======Arrays=======")
 	testArray := []int{84, -37, 32, 40, 95}
 	sumRequired := 167
 	//minLen := arrays.ShortestSubarraySum(testArray, sumRequired)
 	//fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d", testArray, sumRequired, minLen)
 	minLenWithMonoqueue := arrays.ShortestSubArraySumWithQueue(testArray, sumRequired)
 	fmt.Printf("array: %v, sum>=: %d, shortest subarray len: %d\n", testArray, sumRequired, minLenWithMonoqueue)
-
-	f, err := ioutil.TempFile("", "file")
-	if err != nil {
-		panic(err)
-	}
-	_, err = io.Copy(f, strings.NewReader("New string"))
-	if err != nil {
-		panic(err)
-	}
-	_, err = f.Seek(0, io.SeekStart)
-	if err != nil {
-		panic(err)
-	}
-	err = os.Remove(f.Name())
-	if err != nil {
-		panic(err)
-	}
-	buff := bytes.NewBuffer([]byte{})
-	_, err = io.Copy(buff, f)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("%s\n", buff.String())
 	fmt.Println("======BinaryTree Started=======")
 	node := &trees.TreeNode{
 		Val: 5,
@@ -168,10 +140,16 @@ func main() {
 	t.AddElement(6)
 	t.AddElement(15)
 	t.Print()
-	fmt.Printf("inorder traversal for tree: %x\n", t.InOrderTraversal())
-	fmt.Printf("pre-order traversal for tree: %x\n", t.PreOrderTraversal())
-	fmt.Printf("post-order traversal for tree: %x\n", t.PostOrderTraversal())
-	fmt.Printf("bfs for tree: %x\n", t.BFS())
+	vals := make([]int, 0)
+	t.InOrderTraversal(t.Root, &vals)
+	fmt.Printf("inorder traversal for tree: %v\n", vals)
+	vals = []int{}
+	t.PreOrderTraversal(t.Root, &vals)
+	fmt.Printf("pre-order traversal for tree: %v\n", vals)
+	vals = []int{}
+	t.PostOrderTraversal(t.Root, &vals)
+	fmt.Printf("post-order traversal for tree: %v\n", vals)
+	fmt.Printf("bfs for tree: %v\n", t.BFS())
 	fmt.Println("======BinaryTree Ended=======")
 
 }

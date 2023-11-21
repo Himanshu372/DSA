@@ -45,3 +45,7 @@ Desktop.in
 *.replit
 *.lock
 pyproject.toml
+
+# VSCode 
+############
+.vscode/
