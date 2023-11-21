@@ -7,10 +7,11 @@ from Data_Structures.Queues.queues import Queue
 from Data_Structures.Heap.heap import Heap
 
 
-
 class FileItem:
+
     def __init__(self, fname):
         self.fname = fname
+
     def __repr__(self):
         return self.fname
 
@@ -59,9 +60,14 @@ if __name__ == "__main__":
     t = BinaryTree(3)
     t.insert(2)
     t.insert(5)
-    t.preorder_traversal()
-    t.postorder_traversal()
-    t.inorder_traversal()
+    t.insert(9)
+    t.insert(1)
+    print("pre-order traversal started")
+    print(f"{t.preorder_traversal()}")
+    print("post-order traversal started")
+    print(f"{t.postorder_traversal()}")
+    print("in-order traversal started")
+    print(f"{t.inorder_traversal()}")
     t.breath_first_traversal()
     print("=====Binary-tree ended======")
     print("=====Balanced-Binary-tree started======")
