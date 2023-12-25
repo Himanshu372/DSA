@@ -30,57 +30,8 @@ def from_json(json_object):
         return FileItem(json_object['fname'])
 
 
-def create_tree(l: List[int], q: deque, tree:TreeNode) -> Optional[TreeNode]:
-    if not l:
-        return None
-    # if node is None:
-    #     root = l[0]
-    #     node = TreeNode(root)
-    #     l = l[1:]
-    elem = l[0]
-    if tree is None:
-        tree = TreeNode(elem)
-        q = deque([tree])
-        return create_tree()
-    node = q.popleft()
-    node.left = l[1]
-    q.append(node.left)
-    node.right = l[2]
-    q.append(node.right)
-    return create_tree(l[3:], q, tree)
-
-def buildTree(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-    if len(preorder) == 1 and len(inorder) == 1:
-        return TreeNode(preorder[0])
-    root = preorder[0]
-    pos = inorder.index(root)
-    left_subtree, right_subtree = inorder[:pos], inorder[pos:]
-    l, r = len(left_subtree), len(right_subtree)
-    if l > r:
-        if (l - r) % 2 == 0:
-            pre = suf = (l - r) / 2
-            right_subtree = [None] * pre + right_subtree + [None] * suf
-        else:
-            suf = (l - r)
-            right_subtree = right_subtree + [None] * suf
-    else:
-        if (r - l) % 2 == 0:
-            pre = suf = (r - l) / 2
-            left_subtree = [None] * pre + left_subtree + [None] * suf
-        else:
-            suf = (r - l)
-            left_subtree = left_subtree + [None] * suf
-    left = create_tree(left_subtree[::-1], deque([]), None)
-    return left
-
-    
-    node.right = l.popleft()
-    return
-
-
 if __name__ == "__main__":
     print("~~~~ START ~~~~~")
-    print(buildTree([3,9,20,15,7], [9,3,15,20,7]))
     f = JSONDecoder(object_hook=from_json)
     obj = f.decode('{"fname": "/foo/bar"}')
     print(obj)
