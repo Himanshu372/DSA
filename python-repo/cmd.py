@@ -5,7 +5,16 @@ from Data_Structures.Stack.stack import Stack
 from Data_Structures.Trees.balanced_trees import BalancedBinaryTree, BinaryTree
 from Data_Structures.Queues.queues import Queue
 from Data_Structures.Heap.heap import Heap
+from typing import List, Optional
+from collections import defaultdict, deque
 
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 class FileItem:
 

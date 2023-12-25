@@ -1,6 +1,5 @@
 from .binary_search_tree import Node, BinaryTree
 
-
 class BalancedNode(Node):
 
     def __init__(self,value=None, parent=None):
@@ -130,12 +129,3 @@ class BalancedBinaryTree(BinaryTree):
             left_node.parent = parent
         self._update_height(node)
         return left_node
-
-
-if __name__ == '__main__':
-    t = BalancedBinaryTree(2)
-    t.insert(5)
-    t.insert(10)
-    t.insert(15)
-    t.insert(17)
-    print(t)
