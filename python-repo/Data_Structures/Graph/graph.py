@@ -5,7 +5,7 @@ import collections
 class GraphNode:
 
     def __init__(self, val: int):
-        self.node = val
+        self.val = val
         self.adjacent = []
 
 
@@ -60,12 +60,11 @@ class Graph:
         stack.append(node)
         return
 
-    def topological_sort(self, base: GraphNode) -> List[GraphNode]:
+    def topological_sort(self) -> List[GraphNode]:
         visited, stack = dict(), []
-        self._dfs_ts(base, visited, stack)
         for node in self.graph:
             if not visited.get(node):
-                stack.append(node)
+                self._dfs_ts(node, visited, stack)
         return stack[::-1]
 
 
@@ -81,7 +80,7 @@ if __name__ == "__main__":
     g.add_adjacent(c, b)
     #g.bfs(a)
     #g.dfs(a)
-    sorted_array = g.topological_sort(a)
-    print("\n".join(str(i.node) for i in sorted_array))
+    sorted_array = g.topological_sort()
+    print("\n".join(str(i.val) for i in sorted_array))
     print("====Ended====")
 
