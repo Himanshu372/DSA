@@ -7,6 +7,7 @@ from Data_Structures.Queues.queues import Queue
 from Data_Structures.Heap.heap import Heap
 from typing import List, Optional
 from collections import defaultdict, deque
+from Algo.Backtracking.backtracking import Solution as BacktrackingSolution
 
 
 # Definition for a binary tree node.
@@ -112,4 +113,11 @@ if __name__ == "__main__":
     h.delete()
     print(h)
     print("=====Heap ended=====")
+    print("=====Backtracking started=====")
+    # print(s.combine(4, 2))
+    # print(s.permute([1,2,3]))
+    # print(s.parenthesis(3))
+    bts = BacktrackingSolution()
+    print(bts.word_exists([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB"))
+    print("=====Backtracking ended=====")
     print("~~~~ END ~~~~~")
