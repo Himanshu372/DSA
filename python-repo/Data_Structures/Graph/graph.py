@@ -34,7 +34,7 @@ class Graph:
                 return  
         if len(self.graph) != 0 and isinstance(self.graph[0], GraphNodeWeighted):
                 for vertex in self.graph:
-                    print(f'{vertex.node}: {", ".join(str(each.node) for each in vertex.adjacent)}')
+                    print(f'{vertex.val}: {", ".join(str(each.val) for each in vertex.adjacent)}')
                 return  
 
 
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     #g.bfs(a)
     #g.dfs(a)
     print(f'printing non weighted graph: {g.print()}')
-    sorted_array = g.topological_sort(a)
+    sorted_array = g.topological_sort()
     # print(f'Topological sort: {", ".join(str(i.node) for i in sorted_array)}')
     a, b, c, d = GraphNodeWeighted(2), GraphNodeWeighted(3), GraphNodeWeighted(5), GraphNodeWeighted(7)
     g = Graph([a, b, c, d])
