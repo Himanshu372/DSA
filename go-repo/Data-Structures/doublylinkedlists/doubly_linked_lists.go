@@ -5,9 +5,9 @@ import (
 )
 
 type DoublyLinkedNode struct {
-	val			int
-	previous	*DoublyLinkedNode
-	next		*DoublyLinkedNode
+	val      int
+	previous *DoublyLinkedNode
+	next     *DoublyLinkedNode
 }
 
 func NewDoublyLinkedNode(value int) (*DoublyLinkedNode, error) {
@@ -19,8 +19,8 @@ func NewDoublyLinkedNode(value int) (*DoublyLinkedNode, error) {
 }
 
 type DoublyLinkedList struct {
-	head					*DoublyLinkedNode
-	doublyLinkedListMap		map[int]*DoublyLinkedNode
+	head                *DoublyLinkedNode
+	doublyLinkedListMap map[int]*DoublyLinkedNode
 }
 
 func NewDoublyLinkedList(value int) (dll *DoublyLinkedList, err error) {
@@ -88,7 +88,7 @@ func (dll *DoublyLinkedList) InsertAtStart(value int) (err error) {
 	newHead.next = currentHead
 	dll.head = newHead
 	for i = lenght; i >= 1; i-- {
-		tempNode = dll.doublyLinkedListMap[i - 1]
+		tempNode = dll.doublyLinkedListMap[i-1]
 		dll.doublyLinkedListMap[i] = tempNode
 	}
 	dll.doublyLinkedListMap[0] = newHead
@@ -108,7 +108,7 @@ func (dll *DoublyLinkedList) InsertAtEnd(value int) (err error) {
 	if err != nil {
 		return err
 	}
-	previousLastNode = dll.doublyLinkedListMap[lenght - 1]
+	previousLastNode = dll.doublyLinkedListMap[lenght-1]
 	previousLastNode.next = newLastNode
 	newLastNode.previous = previousLastNode
 	dll.doublyLinkedListMap[lenght] = newLastNode
@@ -129,7 +129,7 @@ func (dll *DoublyLinkedList) InsertInBetween(value int) (err error) {
 	if err != nil {
 		return err
 	}
-	if lenght % 2 == 0 {
+	if lenght%2 == 0 {
 		midLenght = (lenght / 2) - 1
 	} else {
 		midLenght = lenght / 2
@@ -141,11 +141,11 @@ func (dll *DoublyLinkedList) InsertInBetween(value int) (err error) {
 	for i := lenght - 1; i > midLenght; i-- {
 		var tempNode *DoublyLinkedNode
 		tempNode = dll.doublyLinkedListMap[i]
-		dll.doublyLinkedListMap[i + 1] = tempNode
+		dll.doublyLinkedListMap[i+1] = tempNode
 	}
-	dll.doublyLinkedListMap[midLenght + 1] = newNode
-	dll.doublyLinkedListMap[midLenght + 1].previous = previousNode
-	dll.doublyLinkedListMap[midLenght + 1].next = nextNode
+	dll.doublyLinkedListMap[midLenght+1] = newNode
+	dll.doublyLinkedListMap[midLenght+1].previous = previousNode
+	dll.doublyLinkedListMap[midLenght+1].next = nextNode
 	return nil
 }
 

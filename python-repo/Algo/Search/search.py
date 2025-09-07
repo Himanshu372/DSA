@@ -1,4 +1,3 @@
-
 class Search:
     def __init__(self, arr: list) -> None:
         self.input_arr = arr

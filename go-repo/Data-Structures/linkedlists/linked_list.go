@@ -2,6 +2,7 @@ package linkedlists
 
 import (
 	"fmt"
+
 	"github.com/pkg/errors"
 )
 
@@ -17,7 +18,7 @@ func NewNode(val int) (*Node, error) {
 }
 
 type SinglyLinkedList struct {
-	Head 		*Node
+	Head *Node
 }
 
 func NewLinkedList(HeadVal int) (*SinglyLinkedList, error) {
@@ -154,7 +155,7 @@ func (ll *SinglyLinkedList) ReverseLinkedList() (*SinglyLinkedList, error) {
 	reversedLinkedListMap := make(map[int]*Node, 0)
 	var index int
 	var node *Node
-	for i := 0; i < lenght ; i++ {
+	for i := 0; i < lenght; i++ {
 		index = (lenght - 1) - i
 		node = currentHead
 		node.next = previousNode
@@ -168,6 +169,3 @@ func (ll *SinglyLinkedList) ReverseLinkedList() (*SinglyLinkedList, error) {
 	reversedLinkedList.Head = reversedLinkedListMap[0]
 	return reversedLinkedList, nil
 }
-
-
-
