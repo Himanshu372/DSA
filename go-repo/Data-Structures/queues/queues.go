@@ -1,9 +1,9 @@
 package queues
 
 type Queue struct {
-	Front	int
-	Size	int
-	Array 	map[int]int `default:nil`
+	Front int
+	Size  int
+	Array map[int]int `default:nil`
 }
 
 func NewQueue(size int) (*Queue, error) {
@@ -21,7 +21,7 @@ func (queue *Queue) resize() (err error) {
 	newArray := make(map[int]int, newSize)
 	oldSize := queue.Size
 	for i := front; i < oldSize; i++ {
-		newArray[i % newSize] = queue.Array[i]
+		newArray[i%newSize] = queue.Array[i]
 	}
 	queue.Array = newArray
 	queue.Size = newSize

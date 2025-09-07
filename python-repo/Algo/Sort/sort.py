@@ -97,4 +97,3 @@ class Sort:
             else:
                 right.append(i)
         return self.recursive_quick_sort(left) + center + self.recursive_quick_sort(right)
-

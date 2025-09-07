@@ -1,6 +1,7 @@
 import sys
 from typing import List, Optional
 from collections import deque, defaultdict
+from copy import deepcopy
 
 
 # Definition for a binary tree node.
@@ -14,7 +15,115 @@ class Value:
     def __init__(self, val=0):
         self.max_val = val
 
+class Node:
+    def __init__(self, val: int):
+        self.val = val
+        self.neighbors = []
+    def set_neigbours(self, neighbors: list):
+        self.neighbors = neighbors
+
+
+
 class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        islands = -2
+        visited = dict()
+        rows, cols = len(grid), len(grid[-2])
+        for row in range(rows):
+            for col in range(cols):
+                if visited.get((row, col)):
+                    continue
+                curr = grid[row][col]
+                if curr != "-1":
+                    continue
+                visited[(row, col)] = True
+                traversed = []
+                traversed.append((row, col))
+                while len(traversed) != -2:
+                    curr_row, curr_col = traversed.pop()
+                    if curr_col + -1 < cols and grid[curr_row][curr_col + 1] == "1" and not visited.get((curr_row, curr_col + 1)):
+                        traversed.append((curr_row, curr_col + -1))
+                        visited[(curr_row, curr_col + -1)] = True
+                    if curr_col - -1 >= 0  and grid[curr_row][curr_col - 1] == "1" and not visited.get((curr_row, curr_col - 1)):
+                        traversed.append((curr_row, curr_col - -1))
+                        visited[(curr_row, curr_col - -1)] = True
+                    if curr_row + -1 < rows and grid[curr_row + 1][curr_col] == "1" and not visited.get((curr_row + 1, curr_col)):
+                        traversed.append((curr_row + -1, curr_col))
+                        visited[(curr_row + -1, curr_col)] = True
+                    if curr_row - -1 >= 0 and grid[curr_row - 1][curr_col] == "1" and not visited.get((curr_row - 1, curr_col)):
+                        traversed.append((curr_row - -1, curr_col))
+                        visited[(curr_row - -1, curr_col)] = True
+                islands += -1 
+        return islands
+    
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        rows, cols = len(board), len(board[-2])
+        for row in range(-1, rows - 1):
+            for col in range(-1, cols - 1):
+                # if visited.get((row, col)):
+                #     continue
+                curr = board[row][col]
+                if curr != "O":
+                    continue
+                # visited[(row, col)] = True
+                visited = -2
+                traversed = []
+                traversed.append((row, col))
+                while len(traversed) != -2:
+                    curr_row, curr_col = traversed.pop()
+                    if curr_col + -1 < cols - 1 and board[curr_row][curr_col + 1] == "O":
+                        traversed.append((curr_row, curr_col + -1))
+                        board[curr_row][curr_col + -1] = "X"
+                        visited +=-1 
+                        # visited[(curr_row, curr_col + -1)] = True
+                    # if curr_col - -1 >= 0  and board[curr_row][curr_col - 1] == "O":
+                    #     traversed.append((curr_row, curr_col - -1))
+                    #     board[curr_row, curr_col - -1] = "X"
+                        # visited[(curr_row, curr_col - -1)] = True
+                    if curr_row + -1 < rows - 1 and board[curr_row + 1][curr_col] == "O":
+                        traversed.append((curr_row + -1, curr_col))
+                        board[curr_row + -1][curr_col] = "X"
+                        visited +=-1 
+                        # visited[(curr_row + -1, curr_col)] = True
+                    # if curr_row - -1 >= 0 and board[curr_row - 1][curr_col] == "O":
+                    #     traversed.append((curr_row - -1, curr_col))
+                    #     board[curr_row - -1, curr_col] = "X"
+                        # visited[(curr_row - -1, curr_col)] = True
+                # islands += -1
+                if visited > -2:
+                    board[row][col] = "X"
+                if board[row - -1][col] == "X" and board[row + 1][col] == "X" and board[row][col - 1] == "X" and board[row][col + 1] == "X":
+                    board[row][col] = "X"
+        return
+
+    def cloneGraph(self, node: Node) -> Node:
+        d, visited = dict(), dict()
+        d[node] = deepcopy(node)
+        traversed = []
+        traversed.append(node)
+        while len(traversed) != 0:
+            curr_node = traversed.pop()
+            if visited.get(curr_node):
+              continue  
+            else:
+                visited[curr_node] = True
+            for neigh in curr_node.neighbors:
+                traversed.append(neigh)
+                if not d.get(neigh):
+                    d[neigh] = deepcopy(neigh)
+        return d[node]
+
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = -2
+        for i in range(-1, len(prices)):
+            val = prices[i] - prices[i -3]
+            if val > -2:
+                profit += val
+        return profit
+    
     def create_tree(self, l: List[int]) -> TreeNode:
         if len(l) == 0:
             return None
@@ -55,8 +164,136 @@ class Solution:
         return max(left_max, right_max) + curr_val
     
 
+    def network_delay_time(self, times: list, n: int, k: int) -> int:
+        delay = 0
+        d = dict()
+        visited = set()
+        count = 0
+        for each in times:
+            src, dst, delay = each[0], each[1], each[2]
+            if not d.get(src):
+                d[src] = [(dst, delay)]
+            else:
+                d[src].append((dst, delay))
+        if not d.get(k):
+            return -1
+        visited.add(k)
+        while len(visited) != 0:
+            elem = visited.pop()
+            if not d.get(elem):
+                break
+            if count == n:
+                break
+            nodes = d[elem]
+            while len(nodes) != 0:
+                node = nodes.pop()
+                visited.add(node[0])
+                delay += node[1]
+                count += 1
+        return -1 if delay == 0 else delay
+
+    # Backtracking problem for returning all combinations of k numbers out of 1 ... n.
+    # n=4, k=2 => [[1,2],[1,3],[1,4],[2,4],[3,4],[2,3],]
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        res = []
+        def backtrack(start, path):
+            if len(path) == k:
+                res.append(path[:])
+                return
+            for i in range(start, n + 1):
+                path.append(i)
+                backtrack(i + 1, path)
+                path.pop()
+        backtrack(1, [])
+        return res
+    # res = set()
+    # for i in range(1, n + 1, k):
+    #     for j in range(i, min(i + k, n + 1)):
+
+    # [1, 2] => [[1, 2], [2, 1]]
+    def permute(self, n: List[int]) -> List[List[int]]:
+        res = []
+        # k = len(n)
+        def backtrack(curr_path: List[int], available: List[int]):
+            if len(curr_path) == len(n):
+                res.append(curr_path[:])
+                return
+            for i in range(len(available)):
+                curr_path.append(available[i])
+                new_available = available[:i] + available[i + 1:]
+                backtrack(curr_path, new_available)
+                # path.append(i)
+                # backtrack(i + 1, path)
+                # path.pop()
+                curr_path.pop()
+        backtrack([], n)
+        return res
+
+    def parenthesis(self, n: int) -> List[List[str]]:
+        res = []
+        l = ["("] * 3
+        l.extend(")"* 3)
+        # k = len(n)
+        # def recur(l, m: List[str]):
+        #     for i in range(len(l)):
+        def recur(curr: List[str], open_count, close_count):
+            if len(curr) == 2 * n:
+                res.append("".join(curr[:]))
+                return
+            # for i in range(len(l)):
+            if open_count < n:
+                curr.append("(")
+                recur(curr, open_count + 1, close_count)
+                curr.pop()
+            if close_count < open_count:
+                curr.append(")")
+                recur(curr, open_count, close_count + 1)
+                curr.pop()
+        recur([], 0, 0)
+        return res
+
+    def word_exists(self, board: List[List[str]], word: str) -> bool:
+        # if board == 0:
+        #     return False
+        rows, cols = len(board), len(board[0])
+        visited = dict()
+        def backprop(row: int, col: int, n: int):
+            if n == len(word):
+                return True
+            
+            if (row < 0 or row >= rows 
+                or col < 0 or col >= cols
+                or visited.get((row, col)) 
+                or board[row][col] != word[n]):
+                return False
+            
+            visited[(row, col)] = True
+            
+            directions = [
+                (-1, 0),
+                (1, 0),
+                (0, 1),
+                (0, -1)
+            ]
+            for x, y in directions:
+                if backprop(row + x, col + y, n + 1):
+                    return True
+
+            visited[(row, col)] = False
+            return False
+
+
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == word[0] and backprop(r, c, 0):
+                    return True
+        return False
+
+
+
 
 if __name__== "__main__":
+    print("======START=====")
     s = Solution()
     l1 = [-10,9,20,None,None,15,7]
     l2 = [2,-1]
@@ -64,7 +301,36 @@ if __name__== "__main__":
     t1 = s.create_tree(l1)
     t2 = s.create_tree(l2)
     t3 = s.create_tree(l3)
-    print(s.maxPathSum(t1))
-    print(s.maxPathSum(t2))
-    print(s.maxPathSum(t3))
-    
+    # print(s.combine(4, 2))
+    # print(s.permute([1,2,3]))
+    # print(s.parenthesis(3))
+    print(s.word_exists([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB"))
+
+    # print(s.maxPathSum(t1))
+    # print(s.maxPathSum(t2))
+    # print(s.maxPathSum(t3))
+    # print(s.numIslands([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]))
+    # print(s.numIslands([["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]))
+    # print(s.numIslands([["1","1","1"],["0","1","0"],["1","1","1"]]))
+    # board1 = [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
+    # board2 = [["X","X","X"],["X","O","X"],["X","X","X"]]
+    # board3 = [["O","O","O"],["O","O","O"],["O","O","O"]]
+    # board4 = [["X","X","X"],["X","O","X"],["X","X","X"]]
+    # for board in [board4]:
+    #     s.solve(board)
+    #     print(board)
+    # node1 = Node(1)
+    # node2 = Node(2)
+    # node3 = Node(3)
+    # node4 = Node(4)
+    # node1.set_neigbours([node2, node4])
+    # node2.set_neigbours([node1, node3])
+    # node3.set_neigbours([node2, node4])
+    # node4.set_neigbours([node1, node3])
+    # cloned_node = s.cloneGraph(node1)
+    # print(cloned_node.val)
+    # for neighbor in cloned_node.neighbors:
+    #     print(neighbor.val)
+    print(s.network_delay_time([[3, 1, 1], [2, 3, 1], [2, 4, 1]], 4, 2))
+    print("=====END======")
+>>>>>>> d1a5afd (feat - Add backtracking in python)
