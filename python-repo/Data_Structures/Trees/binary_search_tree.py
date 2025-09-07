@@ -1,5 +1,3 @@
-
-
 class Node(object):
     """
     ADT for implementing Binary tree
@@ -95,4 +93,3 @@ class BinaryTree(object):
         children = self._get_children(curr_node)
         for child in children:
             self.breath_first_traversal(child)
-

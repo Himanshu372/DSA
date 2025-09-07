@@ -1,4 +1,3 @@
-
 class Stack(object):
     """
     Implementation of Stack class. If follows LIFO(Last In First Out) principle
