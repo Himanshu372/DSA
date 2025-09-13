@@ -49,3 +49,6 @@ pyproject.toml
 # VSCode 
 ############
 .vscode/
+
+#######
+*test*.py
